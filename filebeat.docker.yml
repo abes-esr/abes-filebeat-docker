@@ -1,0 +1,24 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+      hints.default_config.enabled: false
+
+# quid de l'utilité de ces deux lignes ?
+processors:
+- add_cloud_metadata: ~
+
+# Partie commentée car on envoie pour le moment
+# les logs dans logstash et pas directement dans elasticsearch (en discussion)
+#output.elasticsearch:
+#  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
+#  username: '${ELASTICSEARCH_USERNAME:}'
+#  password: '${ELASTICSEARCH_PASSWORD:}'
+
+output.logstash:
+  hosts: '${LOGSTASH_HOST}'
