@@ -34,7 +34,14 @@ docker-compose logs -f --tail=50
 Une application exemple est disponible dans ce depot qui pourra envoyer des logs au format nginx.
 Pour la lancer et pour générer une ligne de log avec curl :
 ```
+cd /opt/pod/abes-filebeat-docker/
 docker-compose --profile=debug up -d
 curl http://127.0.0.1:8081
+```
+
+Pour la stopper :
+```
+cd /opt/pod/abes-filebeat-docker/
+docker-compose stop abes-filebeat-app-exemple
 ```
 
