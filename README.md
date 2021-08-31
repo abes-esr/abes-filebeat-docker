@@ -49,3 +49,7 @@ Il est également possible d'ajouter des traces au niveau de filebeat lui même 
 ```yml
     command: ["-e", "--strict.perms=false", "--d=*"]
 ```
+ou comme ceci pour n'avoir que le debug des logs envoyées à logstash :
+```yml
+    command: ["-e", "--strict.perms=false", "--d=processors"]
+```
