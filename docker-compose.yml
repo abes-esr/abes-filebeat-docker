@@ -3,7 +3,7 @@ version: '3'
 services:
 
   abes-filebeat:
-    image: docker.elastic.co/beats/filebeat:7.17.0
+    image: docker.elastic.co/beats/filebeat:7.17.9
     container_name: abes-filebeat
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
@@ -22,20 +22,20 @@ services:
 
 
 
-  abes-filebeat-app-exemple:
-    image: nginx:1.21.1
-    container_name: abes-filebeat-app-exemple
-    restart: unless-stopped
-    mem_limit: ${MEM_LIMIT}
-    ports:
-      - 8081:80
-    labels:
-      - "co.elastic.logs/enabled=true"
-      - "co.elastic.logs/module=nginx"
-      - "co.elastic.logs/fileset.stdout=access"
-      - "co.elastic.logs/fileset.stderr=error"
-      - "co.elastic.logs/processors.add_fields.target="
-      - "co.elastic.logs/processors.add_fields.fields.abes_appli=abes-filebeat-app-exemple"
-      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=Httpd"
-    profiles: ["debug"]
+#  abes-filebeat-app-exemple:
+#    image: nginx:1.21.1
+#    container_name: abes-filebeat-app-exemple
+#    restart: unless-stopped
+#    mem_limit: ${MEM_LIMIT}
+#    ports:
+#      - 8081:80
+#    labels:
+#      - "co.elastic.logs/enabled=true"
+#      - "co.elastic.logs/module=nginx"
+#      - "co.elastic.logs/fileset.stdout=access"
+#      - "co.elastic.logs/fileset.stderr=error"
+#      - "co.elastic.logs/processors.add_fields.target="
+#      - "co.elastic.logs/processors.add_fields.fields.abes_appli=abes-filebeat-app-exemple"
+#      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=Httpd"
+#    profiles: ["debug"]
 
