@@ -7,6 +7,8 @@ services:
     container_name: abes-filebeat
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     user: root
     volumes:
       - ./filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro
@@ -27,6 +29,8 @@ services:
     container_name: abes-filebeat-app-exemple
     restart: unless-stopped
     mem_limit: ${MEM_LIMIT}
+    memswap_limit: ${MEM_LIMIT}
+    cpus: ${CPU_LIMIT}
     ports:
       - 8081:80
     labels:
