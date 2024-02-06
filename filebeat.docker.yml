@@ -1,17 +1,22 @@
-filebeat.config:
-  modules:
-    path: ${path.config}/modules.d/*.yml
-    reload.enabled: false
+# Filebeat configuration
 
 filebeat.autodiscover:
   providers:
     - type: docker
       hints.enabled: true
-      hints.default_config.enabled: false
+      hints.default_config:
+        type: container
+        paths:
+          - /var/lib/docker/containers/${data.container.id}/*.log
 
-# quid de l'utilité de ces deux lignes ?
+filebeat.config:
+  modules:
+    # In Ubuntu container:   path: /usr/share/filebeat/modules.d/
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: true
+
 processors:
-- add_cloud_metadata: ~
+# If running in a cloud environment: - add_cloud_metadata: ~
 
 - drop_fields:
     when:
@@ -20,12 +25,9 @@ processors:
     fields: ["container.labels", "docker.container.labels.io_buildpacks_build_metadata", "docker.container.labels.io_buildpacks_lifecycle_metadata", "docker.container.labels.io_buildpacks_stack_mixins", "docker.container.labels.io_paketo_stack_packages", "docker.container.labels.io_buildpacks_project_metadata", "docker.container.labels.io_buildpacks_stack_description", "docker.container.labels.io_buildpacks_stack_homepage", "docker.container.labels.io_buildpacks_stack_id", " docker.container.labels.io_buildpacks_stack_maintainer", "docker.container.labels.io_buildpacks_stack_maintainer", "docker.container.labels.io_buildpacks_stack_metadata", "docker.container.labels.io_buildpacks_stack_released"]
     ignore_missing: true
 
-# Partie commentée car on envoie pour le moment
-# les logs dans logstash et pas directement dans elasticsearch (en discussion)
-#output.elasticsearch:
-#  hosts: '${ELASTICSEARCH_HOSTS:elasticsearch:9200}'
-#  username: '${ELASTICSEARCH_USERNAME:}'
-#  password: '${ELASTICSEARCH_PASSWORD:}'
-
-output.logstash:
+output.logstash: 
+  enabled: true 
+ 
+  # The Logstash hosts 
   hosts: '${LOGSTASH_HOST}'
+
