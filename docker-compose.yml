@@ -15,14 +15,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
     environment:
-#      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST:-node1}
-#      - KIBANA_HOST=${KIBANA_HOST:-node1}
-#      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME:-elastic}
-#      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD:-changeme}
-      - LOGSTASH_HOST=${LOGSTASH_HOST:-logstashhost}
+      - LOGSTASH_HOST=${LOGSTASH_HOST}
     command: ["-e", "--strict.perms=false"]
-
-
 
   abes-filebeat-app-exemple:
     image: nginx:latest
