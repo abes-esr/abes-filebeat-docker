@@ -17,6 +17,12 @@ filebeat.config:
 
 processors:
 # If running in a cloud environment: - add_cloud_metadata: ~
+- drop_fields:
+    when:
+      contains:
+        message: "/_nuxt/"
+    fields: ["*"]
+    ignore_missing: true
 
 - drop_fields:
     when:
