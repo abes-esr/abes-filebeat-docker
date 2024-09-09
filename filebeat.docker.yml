@@ -20,8 +20,8 @@ processors:
 - drop_fields:
     when:
       contains:
-        message: "/_nuxt/"
-    fields: ["*"]
+        message: "_nuxt"
+    fields: ["message", "event.original"]
     ignore_missing: true
 
 - drop_fields:
