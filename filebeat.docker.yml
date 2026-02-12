@@ -17,6 +17,8 @@ filebeat.config:
 
 processors:
 # If running in a cloud environment: - add_cloud_metadata: ~
+
+# Drop nuxt:
 - drop_fields:
     when:
       contains:
@@ -27,13 +29,51 @@ processors:
 - drop_fields:
     when:
       contains:
+        message: "[nuxt]"
+    fields: ["message", "event.original"]
+    ignore_missing: true
+
+# Drop qualinka-ms:
+- drop_fields:
+    when:
+      contains:
         abes_appli: "qualinka-ms"
     fields: ["container.labels", "docker.container.labels.io_buildpacks_build_metadata", "docker.container.labels.io_buildpacks_lifecycle_metadata", "docker.container.labels.io_buildpacks_stack_mixins", "docker.container.labels.io_paketo_stack_packages", "docker.container.labels.io_buildpacks_project_metadata", "docker.container.labels.io_buildpacks_stack_description", "docker.container.labels.io_buildpacks_stack_homepage", "docker.container.labels.io_buildpacks_stack_id", " docker.container.labels.io_buildpacks_stack_maintainer", "docker.container.labels.io_buildpacks_stack_maintainer", "docker.container.labels.io_buildpacks_stack_metadata", "docker.container.labels.io_buildpacks_stack_released"]
     ignore_missing: true
+                                                                                                                                                                                      33,1          Top
+# Drop images *.svg:
+- drop_fields:
+    when:
+      contains:
+        message: ".svg"
+    fields: ["message", "event.original"]
+    ignore_missing: true
 
-output.logstash: 
-  enabled: true 
- 
+# Drop errors:
+- drop_fields:
+    when:
+      contains:
+        message: "at createError"
+    fields: ["message", "event.original"]
+    ignore_missing: true
+
+- drop_fields:
+    when:
+      contains:
+        message: "at showError"
+    fields: ["message", "event.original"]
+    ignore_missing: true
+
+- drop_fields:
+    when:
+      contains:
+        message: "Vue Router warn"
+    fields: ["message", "event.original"]
+    ignore_missing: true
+
+# OUTPUT
+output.logstash:
+  enabled: true
+
   # The Logstash hosts 
   hosts: '${LOGSTASH_HOST}'
-
