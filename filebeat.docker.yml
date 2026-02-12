@@ -40,7 +40,7 @@ processors:
         abes_appli: "qualinka-ms"
     fields: ["container.labels", "docker.container.labels.io_buildpacks_build_metadata", "docker.container.labels.io_buildpacks_lifecycle_metadata", "docker.container.labels.io_buildpacks_stack_mixins", "docker.container.labels.io_paketo_stack_packages", "docker.container.labels.io_buildpacks_project_metadata", "docker.container.labels.io_buildpacks_stack_description", "docker.container.labels.io_buildpacks_stack_homepage", "docker.container.labels.io_buildpacks_stack_id", " docker.container.labels.io_buildpacks_stack_maintainer", "docker.container.labels.io_buildpacks_stack_maintainer", "docker.container.labels.io_buildpacks_stack_metadata", "docker.container.labels.io_buildpacks_stack_released"]
     ignore_missing: true
-                                                                                                                                                                                      33,1          Top
+
 # Drop images *.svg:
 - drop_fields:
     when:
