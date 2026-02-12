@@ -70,6 +70,13 @@ processors:
         message: "Vue Router warn"
     fields: ["message", "event.original"]
     ignore_missing: true
+    
+- drop_fields:
+    when:
+      contains:
+        message: "node:internal"
+    fields: ["message", "event.original"]
+    ignore_missing: true
 
 # OUTPUT
 output.logstash:
