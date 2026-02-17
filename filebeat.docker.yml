@@ -77,6 +77,13 @@ processors:
         message: "node:internal"
     fields: ["message", "event.original"]
     ignore_missing: true
+    
+- drop_fields:
+    when:
+      contains:
+        message: "/server/chunks"
+    fields: ["message", "event.original"]
+    ignore_missing: true
 
 # OUTPUT
 output.logstash:
