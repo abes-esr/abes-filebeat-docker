@@ -109,5 +109,5 @@ processors:
 output.logstash:
   enabled: true
 
-# The Logstash hosts 
-hosts: '${LOGSTASH_HOST}'
+  # The Logstash hosts 
+  hosts: '${LOGSTASH_HOST}'
