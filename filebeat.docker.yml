@@ -85,6 +85,12 @@ processors:
     fields: ["message", "event.original"]
     ignore_missing: true
 
+- drop_fields:
+    when:
+      contains:
+        message: "193.52.26.65"
+    fields: ["message", "event.original"]
+    ignore_missing: true
 # OUTPUT
 output.logstash:
   enabled: true
