@@ -96,6 +96,13 @@ processors:
         message: "/server/chunks"
     fields: ["message", "event.original"]
     ignore_missing: true
+    
+- drop_fields:
+    when:
+      contains:
+        message: "socket.io"
+    fields: ["message", "event.original"]
+    ignore_missing: true
 
 # Drop internal calls:
 - drop_fields:
